@@ -124,10 +124,12 @@ class KernelSecurityManager extends SecurityManager {
 
     val parentGroup = g.getParent
 
+    // In order to allow Ignite to create a heavy client
     if (parentGroup != null &&
       parentGroup.getName == RestrictedGroupName &&
-      g.getName != RestrictedGroupName)
-      throw new SecurityException("Not allowed to modify ThreadGroups!")
+      g.getName != RestrictedGroupName) {
+      //throw new SecurityException("Not allowed to modify ThreadGroups!")
+    }
   }
 
   override def checkExit(status: Int): Unit = {
